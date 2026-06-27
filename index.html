@@ -75,21 +75,21 @@
     display: flex; align-items: center; gap: 12px;
   }
   .nav-logo-icon {
-    width: 44px; height: 44px;
+    width: 56px; height: 56px;
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cinzel', serif;
-    font-weight: 900; color: var(--royal); font-size: 16px;
+    font-weight: 900; color: var(--royal); font-size: 20px;
     box-shadow: var(--shadow-gold);
     flex-shrink: 0;
   }
-  .nav-logo-text { line-height: 1.2; }
+  .nav-logo-text { line-height: 1.25; }
   .nav-logo-name {
-    font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
+    font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700;
     color: var(--gold-light); letter-spacing: 0.5px;
   }
-  .nav-logo-tag { font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
+  .nav-logo-tag { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
   .nav-links {
     display: flex; gap: 28px; list-style: none;
   }
@@ -131,6 +131,8 @@
   .hero-inner {
     position: relative; z-index: 2;
     max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
@@ -237,7 +239,7 @@
     border-bottom: 3px solid var(--gold);
   }
   .stat-item {
-    flex: 1; min-width: 140px; max-width: 200px;
+    flex: 1; min-width: 140px;
     text-align: center; padding: 16px 20px;
     border-right: 1px solid rgba(201,151,42,0.2);
   }
@@ -250,6 +252,13 @@
 
   /* ===== SECTION STYLES ===== */
   section { padding: 80px 5%; }
+
+  /* ===== WIDE MONITOR CENTERING (1600px+) ===== */
+  @media (min-width: 1600px) {
+    .navbar, .hero, .stats-strip, section { padding-left: calc((100% - 1440px) / 2); padding-right: calc((100% - 1440px) / 2); }
+    .navbar { padding-top: 0; padding-bottom: 0; }
+    .hero-inner { max-width: 1100px; }
+  }
   .section-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
@@ -571,6 +580,7 @@
   }
   .gallery-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    grid-auto-flow: dense;
   }
   .gallery-item {
     border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
@@ -593,6 +603,32 @@
   }
   .gallery-item:hover .gallery-item-overlay { opacity: 1; }
   .gallery-caption { color: white; font-size: 13px; font-weight: 500; }
+
+  /* ===== PROJECT VIDEOS ===== */
+  .video-section { background: var(--off-white); }
+  .video-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .video-card {
+    background: var(--white); border-radius: 16px; overflow: hidden;
+    box-shadow: var(--shadow); border: 1px solid rgba(201,151,42,0.15);
+  }
+  .video-frame {
+    position: relative; width: 100%; aspect-ratio: 16/9; background: var(--dark);
+  }
+  .video-frame iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  }
+  .video-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px; padding: 16px 20px;
+  }
+  .video-card-title { font-size: 14px; font-weight: 600; color: var(--royal); }
+  .video-yt-link {
+    font-size: 12.5px; font-weight: 600; color: var(--gold);
+    text-decoration: none; white-space: nowrap;
+  }
+  .video-yt-link:hover { color: var(--royal); text-decoration: underline; }
 
   /* ===== TESTIMONIALS ===== */
   .testimonials { background: var(--off-white); }
@@ -728,6 +764,7 @@
     .btn { width: 100%; justify-content: center; }
     .gallery-grid { grid-template-columns: 1fr; }
     .calc-row { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
     .stats-strip { gap: 0; }
     .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(201,151,42,0.15); }
     .footer-inner { grid-template-columns: 1fr; }
@@ -747,7 +784,6 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     transition: transform 0.2s;
   }
-  .gallery-item.video-item:hover .play-btn { transform: translate(-50%,-50%) scale(1.15); }
   #lightbox { display: none; }
   #lightbox.open { display: flex !important; }
   #videoModal.open { display: flex !important; }
@@ -1279,8 +1315,10 @@
     </div>
   </div>
 
-  <!-- ===== GALLERY ===== -->
-  <section class="gallery-section" id="gallery">
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section" id="gallery">
     <div class="section-eyebrow">Media Gallery</div>
     <h2 class="section-title">Project Gallery</h2>
     <p class="section-desc">Real photos & videos from our premium projects across Andhra Pradesh.</p>
@@ -1289,7 +1327,6 @@
       <button class="filter-btn active" onclick="filterGallery('all',this)">All</button>
       <button class="filter-btn" onclick="filterGallery('gve',this)">Green Valley</button>
       <button class="filter-btn" onclick="filterGallery('royal',this)">Royal Empire</button>
-      <button class="filter-btn" onclick="filterGallery('video',this)">🎬 Videos</button>
     </div>
 
     <div class="gallery-grid" id="galleryGrid" style="margin-top:24px;">
@@ -1330,18 +1367,6 @@
         <div class="gallery-item-overlay"><span class="gallery-caption">📐 SSTD – Green Valley Layout with Ganesh Blessing</span></div>
       </div>
 
-
-      <!-- VIDEOS -->
-      <div class="gallery-item video-item" data-cat="video" style="position:relative;overflow:hidden;aspect-ratio:9/16;">
-        <iframe src="https://www.youtube.com/embed/p5bV3UNRaUg" title="Project Video 1" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        <div class="gallery-item-overlay"><span class="gallery-caption">🎬 Project Video 1</span></div>
-      </div>
-
-      <div class="gallery-item video-item large" data-cat="video" style="position:relative;overflow:hidden;aspect-ratio:9/16;">
-        <iframe src="https://www.youtube.com/embed/9wp_gZ5f5Nw" title="Project Video 2" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        <div class="gallery-item-overlay"><span class="gallery-caption">🎬 Project Video 2</span></div>
-      </div>
-
     </div>
 
     <!-- Lightbox -->
@@ -1359,7 +1384,35 @@
     </div>
 
   </section>
-</section>
+
+  <!-- ===== PROJECT VIDEOS ===== -->
+  <section class="video-section" id="videos">
+    <div class="section-eyebrow">Watch & Explore</div>
+    <h2 class="section-title">Project Videos</h2>
+    <p class="section-desc">Drone views and walkthroughs of our completed and ongoing projects.</p>
+
+    <div class="video-grid" style="margin-top:24px;">
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/p5bV3UNRaUg" title="Project Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-footer">
+          <span class="video-card-title">🎬 Project Video 1</span>
+          <a href="https://www.youtube.com/watch?v=p5bV3UNRaUg" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/9wp_gZ5f5Nw" title="Project Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-footer">
+          <span class="video-card-title">🎬 Project Video 2</span>
+          <a href="https://www.youtube.com/watch?v=9wp_gZ5f5Nw" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
