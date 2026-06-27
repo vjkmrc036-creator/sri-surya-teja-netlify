@@ -579,8 +579,11 @@
     background: var(--gold); color: var(--royal);
   }
   .gallery-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
     grid-auto-flow: dense;
+    justify-content: center;
   }
   .gallery-item {
     border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
@@ -1398,7 +1401,7 @@
         </div>
         <div class="video-card-footer">
           <span class="video-card-title">🎬 Project Video 1</span>
-          <a href="https://www.youtube.com/watch?v=p5bV3UNRaUg" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
+          <a href="https://youtu.be/p5bV3UNRaUg" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
         </div>
       </div>
 
@@ -1408,7 +1411,7 @@
         </div>
         <div class="video-card-footer">
           <span class="video-card-title">🎬 Project Video 2</span>
-          <a href="https://www.youtube.com/watch?v=9wp_gZ5f5Nw" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
+          <a href="https://youtu.be/9wp_gZ5f5Nw" target="_blank" rel="noopener" class="video-yt-link">Watch on YouTube ↗</a>
         </div>
       </div>
     </div>
