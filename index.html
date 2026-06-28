@@ -621,19 +621,6 @@
   .video-frame iframe {
     position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
   }
-  .video-thumb {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer;
-  }
-  .video-play-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-    width: 64px; height: 64px; background: rgba(255,0,0,0.85); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-  }
-  .video-play-btn::after {
-    content: ''; border-style: solid; border-width: 12px 0 12px 20px;
-    border-color: transparent transparent transparent white; margin-left: 4px;
-  }
   .video-card-footer {
     display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 10px; padding: 16px 20px;
@@ -1407,9 +1394,8 @@
 
     <div class="video-grid" style="margin-top:24px;">
       <div class="video-card">
-        <div class="video-frame" id="vframe1" onclick="playVideo('vframe1','p5bV3UNRaUg')">
-          <img class="video-thumb" src="https://i.ytimg.com/vi/p5bV3UNRaUg/hqdefault.jpg" alt="Project Video 1" loading="lazy">
-          <div class="video-play-btn"></div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/p5bV3UNRaUg" title="Project Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-card-footer">
           <span class="video-card-title">🎬 Project Video 1</span>
@@ -1418,9 +1404,8 @@
       </div>
 
       <div class="video-card">
-        <div class="video-frame" id="vframe2" onclick="playVideo('vframe2','9wp_gZ5f5Nw')">
-          <img class="video-thumb" src="https://i.ytimg.com/vi/9wp_gZ5f5Nw/hqdefault.jpg" alt="Project Video 2" loading="lazy">
-          <div class="video-play-btn"></div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/9wp_gZ5f5Nw" title="Project Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-card-footer">
           <span class="video-card-title">🎬 Project Video 2</span>
@@ -1764,11 +1749,8 @@ function openLightbox(el) {
   document.getElementById('lightbox').style.display = 'flex';
 }
 function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
   document.getElementById('lightbox').style.display = 'none';
-}
-function playVideo(frameId, videoId) {
-  const frame = document.getElementById(frameId);
-  frame.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" title="Project video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 }
 function openVideo(id) {
   const labels = {
